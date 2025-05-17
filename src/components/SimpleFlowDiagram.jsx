@@ -119,11 +119,13 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
                                  <div className="font-semibold text-gray-800">
                                     {step.title}
                                  </div>
-                                 <div className="text-xs text-gray-600 mt-1">
-                                    {step.details && step.details.length ?
-                                       `${step.details.filter(d => d.completed).length}/${step.details.length} complete` :
-                                       "0/0 complete"}
-                                 </div>
+                                 {step.id !== 'NODE_START' && step.id !== 'NODE_END' && (
+                                    <div className="text-xs text-gray-600 mt-1">
+                                       {step.details && step.details.length ?
+                                          `${step.details.filter(d => d.completed).length}/${step.details.length} complete` :
+                                          "0/0 complete"}
+                                    </div>
+                                 )}
                               </div>
                            </div>
 
@@ -161,11 +163,13 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
                                           <div className="font-semibold text-gray-800">
                                              {nestedStep.title}
                                           </div>
-                                          <div className="text-xs text-gray-600 mt-1">
-                                             {nestedStep.details && nestedStep.details.length ?
-                                                `${nestedStep.details.filter(d => d.completed).length}/${nestedStep.details.length} complete` :
-                                                "0/0 complete"}
-                                          </div>
+                                          {nestedStep.id !== 'NODE_START' && nestedStep.id !== 'NODE_END' && (
+                                             <div className="text-xs text-gray-600 mt-1">
+                                                {nestedStep.details && nestedStep.details.length ?
+                                                   `${nestedStep.details.filter(d => d.completed).length}/${nestedStep.details.length} complete` :
+                                                   "0/0 complete"}
+                                             </div>
+                                          )}
                                        </div>
                                     </div>
                                  ))}
