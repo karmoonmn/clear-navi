@@ -10,7 +10,6 @@ import ChatService from '../services/ChatService';
 export default function RegistrationProcess() {
    const [steps, setSteps] = useState([]);
    const [activeStep, setActiveStep] = useState(null);
-   const [isDetailOpen, setIsDetailOpen] = useState(false);
    const [chatbotOpen, setChatbotOpen] = useState(false);
    const [chatMessages, setChatMessages] = useState([
       ChatService.getInitialMessage()
@@ -51,7 +50,6 @@ export default function RegistrationProcess() {
    // Handle step click to view details
    const handleStepClick = (step) => {
       setActiveStep(step);
-      setIsDetailOpen(true);
       // Don't close chatbot if open
       if (chatbotOpen) {
          updateChatbotContext(step);
@@ -209,25 +207,30 @@ export default function RegistrationProcess() {
             <ProgressBar progressPercentage={progressPercentage} />
 
             {/* Process Flow Diagram using custom SimpleFlowDiagram */}
-            <div>
+            <div className='flex '>
                <SimpleFlowDiagram
                   steps={getAllSteps()}
                   activeStep={activeStep}
                   handleStepClick={handleStepClick}
+                  toggleTaskCompletion={toggleTaskCompletion}
+                  handleAskAboutStepClick={handleAskAboutStepClick}
                />
 
                {/* Step Details */}
-               {isDetailOpen && activeStep && (
-                  <StepDetails
-                     activeStep={activeStep}
-                     steps={steps}
-                     handleStepClick={handleStepClick}
-                     toggleTaskCompletion={toggleTaskCompletion}
-                     handleAskAboutStepClick={handleAskAboutStepClick}
-                     getStepIcon={StepIconGenerator.getStepIcon}
-                     onClose={() => setIsDetailOpen(false)}
-                  />
-               )}
+               {/* {isDetailOpen && activeStep && (
+                  <div className=' md:sticky md:top-0 md:self-start'>
+
+                     <StepDetails
+                        activeStep={activeStep}
+                        steps={steps}
+                        handleStepClick={handleStepClick}
+                        toggleTaskCompletion={toggleTaskCompletion}
+                        handleAskAboutStepClick={handleAskAboutStepClick}
+                        getStepIcon={StepIconGenerator.getStepIcon}
+                        onClose={() => setIsDetailOpen(false)}
+                     />
+                  </div>
+               )} */}
             </div>
 
 

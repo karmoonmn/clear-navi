@@ -5,16 +5,8 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
    const containerRef = useRef(null);
    const nodeRefs = useRef({});
 
-   // Fixed node width and spacing
-   // const nodeWidth = 280;
-   // const verticalMargin = 40;
-   // const indentWidth = 40;
-
    // Create a joined array of all steps, with main steps first, then nested steps
    const allSteps = steps.filter(step => !step.id.startsWith('node3') || step.id === 'node3');
-
-   // Find nested steps for node3 and other steps with nested steps
-   // const node3Index = allSteps.findIndex(step => step.id === 'node3');
 
    // Find nested steps for node3
    const nestedSteps = steps.filter(step =>
@@ -80,25 +72,13 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
       }
    };
 
-   // Check if a step is nested or not
-   const isNestedStep = (stepId) => {
-      return (stepId.startsWith('node3') && stepId !== 'node3') ||
-         stepId === 'DOC_DIRECTOR_IC' ||
-         stepId === 'DOC_TSP_QUOTATION';
-   };
-
-   // Handle closing the details panel
-   const handleCloseDetails = () => {
-      handleStepClick(null);
-   };
-
    // Vertical stacked layout for nodes with side details
    return (
-      <div className="relative w-full bg-blue-50 rounded-lg p-8">
-         <div className="flex flex-col md:flex-row gap-6">
+      <div className="relative w-full bg-blue-50 rounded-lg p-4">
+         <div className="flex flex-col lg:flex-row gap-2">
             {/* Left side: Flow diagram */}
             <div
-               className="md:w-1/2 overflow-y-auto"
+               className="lg:w-2/5 overflow-y-auto"
                style={{ minHeight: '500px' }}
             >
                <div
@@ -198,7 +178,7 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
             </div>
 
             {/* Right side: Step details */}
-            <div className="md:w-1/2 md:sticky md:top-0 md:self-start">
+            <div className="lg:w-3/5">
                {activeStep && (
                   <StepDetails
                      activeStep={activeStep}
@@ -207,7 +187,7 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
                      toggleTaskCompletion={toggleTaskCompletion}
                      handleAskAboutStepClick={handleAskAboutStepClick}
                      getStepIcon={getStepIcon}
-                     onClose={handleCloseDetails}
+                     onClose={() => handleStepClick(null)}
                   />
                )}
             </div>
