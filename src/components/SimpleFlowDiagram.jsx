@@ -1,9 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import StepDetails from './StepDetails';
 
 const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompletion, handleAskAboutStepClick }) => {
    const containerRef = useRef(null);
    const nodeRefs = useRef({});
+   const [animatedNodes, setAnimatedNodes] = useState([]);
+   const [hasAnimated, setHasAnimated] = useState(false); // Add this state
 
    // Create a joined array of all steps, with main steps first, then nested steps
    const allSteps = steps.filter(step => !step.id.startsWith('node3') || step.id === 'node3');
@@ -14,6 +16,36 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
       step.id === 'DOC_DIRECTOR_IC' ||
       step.id === 'DOC_TSP_QUOTATION'
    );
+
+   // Animation sequence for nodes on page load
+   useEffect(() => {
+      if (allSteps.length > 0 && !hasAnimated) {
+         // Start with an empty array of animated nodes
+         setAnimatedNodes([]);
+
+         // Sequentially animate nodes with a delay
+         const animationDelay = 150; // milliseconds between each node animation
+
+         // Main steps animation
+         allSteps.forEach((step, index) => {
+            setTimeout(() => {
+               setAnimatedNodes(prev => [...prev, step.id]);
+            }, index * animationDelay);
+         });
+
+         // Nested steps animation (start after main steps)
+         if (nestedSteps.length > 0) {
+            const nestedStartDelay = allSteps.length * animationDelay;
+
+            nestedSteps.forEach((nestedStep, index) => {
+               setTimeout(() => {
+                  setAnimatedNodes(prev => [...prev, nestedStep.id]);
+               }, nestedStartDelay + (index * animationDelay));
+            });
+         }
+         setHasAnimated(true); // Mark as animated
+      }
+   }, [steps, hasAnimated]); // Re-run when steps change
 
    // Get the step icon based on ID
    const getStepIcon = (stepId) => {
@@ -54,19 +86,22 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
          case 'NODE_START':
             return (
                <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor" />
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor" />
+                  <path d="M10 8l6 4-6 4V8z" fill="currentColor" />
                </svg>
             );
          case 'NODE_END':
             return (
                <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor" />
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor" />
+                  <path d="M16 16H8V8h8v8z" fill="currentColor" />
                </svg>
             );
          default:
             return (
                <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor" />
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="currentColor" />
+                  <path d="M12 7c.55 0 1 .45 1 1v5c0 .55-.45 1-1 1s-1-.45-1-1V8c0-.55.45-1 1-1zm0 10c.55 0 1-.45 1-1s-.45-1-1-1-1 .45-1 1 .45 1 1 1z" fill="currentColor" />
                </svg>
             );
       }
@@ -107,15 +142,24 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
                                           ? 'border-navyblue-700'
                                           : 'border-navyblue-200'
                                     }
-                                    transition-all duration-300 hover:opacity-90
+                                    transition-all duration-300 transform
+                                    ${animatedNodes.includes(step.id) ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}
                                  `}
+                                 style={{
+                                    transitionDelay: `${animatedNodes.indexOf(step.id) * 50}ms`
+                                 }}
                               >
                                  <div className="w-8 h-8">
                                     {getStepIcon(step.id)}
                                  </div>
                               </div>
 
-                              <div className="ml-4 flex-1">
+                              <div className={`ml-4 flex-1 transition-all duration-300 transform 
+                                 ${animatedNodes.includes(step.id) ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+                                 style={{
+                                    transitionDelay: `${animatedNodes.indexOf(step.id) * 50 + 100}ms`
+                                 }}
+                              >
                                  <div className="font-semibold text-gray-800">
                                     {step.title}
                                  </div>
@@ -151,15 +195,24 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
                                                    ? 'border-navyblue-700'
                                                    : 'border-navyblue-200'
                                              }
-                                             transition-all duration-300 hover:opacity-90
+                                             transition-all duration-300 transform
+                                             ${animatedNodes.includes(nestedStep.id) ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}
                                           `}
+                                          style={{
+                                             transitionDelay: `${animatedNodes.indexOf(nestedStep.id) * 50}ms`
+                                          }}
                                        >
                                           <div className="w-8 h-8">
                                              {getStepIcon(nestedStep.id)}
                                           </div>
                                        </div>
 
-                                       <div className="ml-4 flex-1">
+                                       <div className={`ml-4 flex-1 transition-all duration-300 transform 
+                                          ${animatedNodes.includes(nestedStep.id) ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+                                          style={{
+                                             transitionDelay: `${animatedNodes.indexOf(nestedStep.id) * 50 + 100}ms`
+                                          }}
+                                       >
                                           <div className="font-semibold text-gray-800">
                                              {nestedStep.title}
                                           </div>
@@ -182,7 +235,7 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
             </div>
 
             {/* Right side: Step details */}
-            <div className="lg:w-3/5">
+            <div className={`lg:w-3/5 transition-all duration-500 ${activeStep ? 'opacity-100' : 'opacity-0'}`}>
                {activeStep && (
                   <StepDetails
                      activeStep={activeStep}
