@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
-import { grantProcessSteps } from '../data/newDataMalay';
+import { grantProcessSteps } from '../data/data';
 import ProgressBar from '../components/ProgressBar';
 import SimpleFlowDiagram from '../components/SimpleFlowDiagram';
 import Chatbot from '../components/Chatbot';
 import ChatService from '../services/ChatService';
 
 export default function RegistrationProcess() {
+   const { t } = useTranslation();
    const navigate = useNavigate();
    const [steps, setSteps] = useState([]);
    const [activeStep, setActiveStep] = useState(null);
@@ -145,7 +147,7 @@ export default function RegistrationProcess() {
 
       // Generate the response
       setTimeout(() => {
-         let botResponse = "I don't have specific information about that question.";
+         let botResponse = t('botResponse');
 
          // Check if we have a predefined answer
          if (activeStep) {
@@ -205,15 +207,15 @@ export default function RegistrationProcess() {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                      <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
                   </svg>
-                  back
+                  {t('back')}
                </button>
             </div>
 
             <h1 className="text-3xl font-bold text-navyblue-800 text-center mb-4">
-               Geran Digitalisasi PMKS - E-dagang & Inventori
+               {t('title')}
             </h1>
             <p className="text-center text-gray-700 mb-6">
-               Peta perjalanan visual langkah demi langkah untuk memohon Geran Padanan Digitalisasi PMKS
+               {t('description')}
             </p>
 
             {/* Progress Bar */}
@@ -228,22 +230,6 @@ export default function RegistrationProcess() {
                   toggleTaskCompletion={toggleTaskCompletion}
                   handleAskAboutStepClick={handleAskAboutStepClick}
                />
-
-               {/* Step Details */}
-               {/* {isDetailOpen && activeStep && (
-                  <div className=' md:sticky md:top-0 md:self-start'>
-
-                     <StepDetails
-                        activeStep={activeStep}
-                        steps={steps}
-                        handleStepClick={handleStepClick}
-                        toggleTaskCompletion={toggleTaskCompletion}
-                        handleAskAboutStepClick={handleAskAboutStepClick}
-                        getStepIcon={StepIconGenerator.getStepIcon}
-                        onClose={() => setIsDetailOpen(false)}
-                     />
-                  </div>
-               )} */}
             </div>
 
 
@@ -261,7 +247,7 @@ export default function RegistrationProcess() {
             />
 
             <p className="text-center text-gray-500 mt-8">
-               Click on any step to view details or ask questions using the chat assistant
+               {t('stepDetails.clickToView')}
             </p>
          </div>
       </div>

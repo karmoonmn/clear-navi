@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Chatbot = ({
    chatbotOpen,
@@ -11,6 +12,7 @@ const Chatbot = ({
    handleSuggestedQuestionClick,
    handleChatbotToggle
 }) => {
+   const { t } = useTranslation();
    return (
       <>
          {/* Chatbot Toggle Button */}
@@ -34,14 +36,13 @@ const Chatbot = ({
          {chatbotOpen && (
             <div className="fixed bottom-24 right-6 w-100 md:w-100 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden flex flex-col transition-all duration-300 ease-in max-h-96">
                <div className="bg-navyblue-600 text-white px-4 py-3 flex justify-between items-center">
-                  <h3 className="font-medium">Registration Assistant</h3>
+                  <h3 className="font-medium">{t('registrationAssistant')}</h3>
                   <div className="flex items-center">
                      {activeStep && (
                         <span className="mr-2 text-xs bg-white text-navyblue-700 px-2 py-0.5 rounded-full">
-                           Step {activeStep.id}
+                           {t('step')} {activeStep.id}
                         </span>
                      )}
-                     <span className="text-xs bg-green-500 px-2 py-0.5 rounded-full">Online</span>
                   </div>
                </div>
 

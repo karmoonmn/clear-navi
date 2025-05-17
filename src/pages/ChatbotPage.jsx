@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ChatService from '../services/ChatService';
+import { useTranslation } from 'react-i18next';
 
 const ChatbotPage = () => {
+   const { t } = useTranslation();
    const navigate = useNavigate();
    const [messages, setMessages] = useState([
-      { sender: 'bot', text: 'Welcome to the NaviClear! I\'m here to help you with the application process. What would you like to know about the Digitalization Grant for E-commerce and Inventory Management?' }
+      { sender: 'bot', text: t('chatbotInitialMessage') }
    ]);
    const [inputValue, setInputValue] = useState('');
    const [isTyping, setIsTyping] = useState(false);
@@ -13,10 +14,10 @@ const ChatbotPage = () => {
 
    // Suggested questions for initial guidance
    const suggestedQuestions = [
-      'What is the PMKS Digitalization Grant?',
-      'Who is eligible to apply?',
-      'How much grant funding can be obtained?',
-      'I want to see the application process',
+      t('chatbotQuestion1'),
+      t('chatbotQuestion2'),
+      t('chatbotQuestion3'),
+      t('chatbotQuestion4'),
    ];
 
    useEffect(() => {
@@ -49,11 +50,11 @@ const ChatbotPage = () => {
       setIsTyping(true);
 
       // If user wants to see the process, navigate there
-      if (question === 'I want to see the application process') {
+      if (question === t('chatbotQuestion4')) {
          setTimeout(() => {
             setMessages(prev => [...prev, {
                sender: 'bot',
-               text: 'Great, I\'ll show you the PMKS Digitalization Grant application process step by step.'
+               text: t('chatbotQuestion4Answer')
             }]);
             setTimeout(() => navigate('/registration'), 1500);
          }, 1000);
@@ -72,23 +73,23 @@ const ChatbotPage = () => {
       // Simple response logic - in a real app, this would be more sophisticated
       const questionLower = question.toLowerCase();
 
-      if (questionLower.includes('what is') || questionLower.includes('what are') || questionLower.includes('digitalization grant')) {
-         return 'The PMKS Digitalization Grant is a government initiative to help Micro, Small, and Medium Enterprises (PMKS) adopt digital solutions such as e-commerce and inventory management systems. It aims to enhance business productivity and competitiveness.';
+      if (questionLower.includes(t('whatIs')) || questionLower.includes(t('whatAre')) || questionLower.includes(t('digitalizationGrant'))) {
+         return t('chatbotResponseWhatIs');
       }
 
-      if (questionLower.includes('eligible') || questionLower.includes('who') || questionLower.includes('eligibility')) {
-         return 'Eligible businesses include valid Malaysian PMKS with at least 60% equity owned by Malaysian citizens, operational for at least 6 months (3 months for Sabah/Sarawak), and not blacklisted by any government or financial agency.';
+      if (questionLower.includes(t('eligible')) || questionLower.includes(t('who')) || questionLower.includes(t('eligibility'))) {
+         return t('chatbotResponseEligibility');
       }
 
-      if (questionLower.includes('value') || questionLower.includes('how much') || questionLower.includes('amount')) {
-         return 'This is a 50:50 matching grant, where the government will fund 50% of the digital solution costs (E-commerce and/or Inventory), subject to certain maximum limits. For the latest information, please refer to the official guidelines.';
+      if (questionLower.includes(t('value')) || questionLower.includes(t('how much')) || questionLower.includes(t('amount'))) {
+         return t('chatbotResponseValue');
       }
 
-      if (questionLower.includes('see') || questionLower.includes('process') || questionLower.includes('steps')) {
-         return 'I can show you the application process visually. Click the "View Application Process" button to proceed to the step-by-step guide.';
+      if (questionLower.includes(t('see')) || questionLower.includes(t('process')) || questionLower.includes(t('steps'))) {
+         return t('chatbotResponseProcess');
       }
 
-      return 'For more information about the PMKS Digitalization Grant, please click the "View Application Process" button to see the detailed guide or ask another specific question.';
+      return t('chatbotResponseDefault');
    };
 
    return (
@@ -96,8 +97,8 @@ const ChatbotPage = () => {
          {/* Header */}
          <div className="bg-navyblue-700 text-white p-4">
             <div className="container mx-auto">
-               <h1 className="text-2xl font-bold">Welcome to NaviClear</h1>
-               <p className="text-sm opacity-80">Virtual Assistant for Grant & Regulation</p>
+               <h1 className="text-2xl font-bold">{t('chatbotGreeting')}</h1>
+               <p className="text-sm opacity-80">{t('chatbotTitle')}</p>
             </div>
          </div>
 
@@ -157,7 +158,7 @@ const ChatbotPage = () => {
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Type your question here..."
+                  placeholder={t('questionPlaceholder')}
                   className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-navyblue-500"
                />
                <button
@@ -176,7 +177,7 @@ const ChatbotPage = () => {
                   onClick={() => navigate('/registration')}
                   className="bg-navyblue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-navyblue-700 transition-colors"
                >
-                  View Application Process
+                  {t('chatbotViewApplicationProcess')}
                </button>
             </div>
          </div>
