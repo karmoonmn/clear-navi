@@ -6,7 +6,7 @@ const TaskItem = ({ detail, index, isCompleted, toggleTaskCompletion, stepId }) 
          <button
             onClick={() => toggleTaskCompletion(stepId, index)}
             className={`flex items-center justify-center w-6 h-6 rounded-full border mt-0.5 ${isCompleted
-               ? 'bg-green-500 border-green-600'
+               ? 'bg-green-600 border-green-700'
                : 'bg-white border-gray-300 hover:bg-gray-100'
                }`}
          >
