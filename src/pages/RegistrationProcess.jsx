@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
-import { grantProcessSteps } from '../data/data';
+import { grantProcessSteps as malaySteps } from '../data/data.js';
+import { grantProcessSteps as englishSteps } from '../data/englishData.js';
 import ProgressBar from '../components/ProgressBar';
 import SimpleFlowDiagram from '../components/SimpleFlowDiagram';
 import Chatbot from '../components/Chatbot';
 import ChatService from '../services/ChatService';
 import { LanguageCode } from '../lang/LanguageCode';
+import { LanguageIcon } from '@heroicons/react/24/outline';
 
 export default function RegistrationProcess() {
-   const { t, i18n: {changeLanguage, language} } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState(language)
+   const { t, i18n: { changeLanguage, language } } = useTranslation();
+   const [currentLanguage, setCurrentLanguage] = useState(language)
 
-  const handleChangeLanguage = () => {
+   const handleChangeLanguage = () => {
       const newLanguage = currentLanguage === LanguageCode.ENGLISH ? LanguageCode.MELAYU : LanguageCode.ENGLISH;
       setCurrentLanguage(newLanguage);
       changeLanguage(newLanguage);
@@ -27,10 +29,13 @@ export default function RegistrationProcess() {
    const [newMessage, setNewMessage] = useState('');
    const [suggestedQuestions, setSuggestedQuestions] = useState([]);
 
-   // Use grant process steps data when component mounts
+   // Use grant process steps data when component mounts or language changes
    useEffect(() => {
-      setSteps(grantProcessSteps);
-   }, []);
+      const stepsData = currentLanguage === LanguageCode.ENGLISH ? englishSteps : malaySteps;
+      setSteps(stepsData);
+      // Reset active step when language changes
+      setActiveStep(null);
+   }, [currentLanguage]);
 
    // Calculate overall progress
    const totalTasks = steps.reduce((acc, step) => {
@@ -220,8 +225,14 @@ export default function RegistrationProcess() {
                   </svg>
                   {t('back')}
                </button>
-               <button onClick={handleChangeLanguage}>
-                  {currentLanguage === LanguageCode.MELAYU ? 'Inggeris' : 'Malay'}
+               <button
+                  onClick={handleChangeLanguage}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-navyblue-300 text-navyblue-700 hover:bg-navyblue-50 transition-colors shadow-sm"
+               >
+                  <LanguageIcon className="h-5 w-5" />
+                  <span className="font-medium">
+                     {currentLanguage === LanguageCode.MELAYU ? 'EN' : 'BM'}
+                  </span>
                </button>
             </div>
 

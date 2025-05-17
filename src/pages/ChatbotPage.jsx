@@ -89,7 +89,38 @@ const ChatbotPage = () => {
          return t('chatbotResponseProcess');
       }
 
-      return t('chatbotResponseDefault');
+      if (questionLower.includes("milk tea")) {
+         return "Nice! Opening a milk tea shop sounds delicious and fun! Do you already have a business plan?";
+      }
+
+      if (questionLower.includes("business plan")) {
+         return "That's a great start. Are you planning to go online or use any digital tools to manage your business?";
+      }
+
+      if (
+         questionLower.includes("grant") ||
+         questionLower.includes("government help") ||
+         questionLower.includes("digitalisation")
+      ) {
+         return "You might want to check out the Geran Digitalisasi PMKS! It can cover up to 50% or RM5,000 of your digital expenses.";
+      }
+
+      if (questionLower.includes("how to apply")) {
+
+         setTimeout(() => {
+            setMessages(prev => [...prev, {
+               sender: 'bot',
+               text: t('chatbotQuestion4Answer')
+            }]);
+            setTimeout(() => navigate('/registration'), 1500);
+         }, 2000);
+
+
+         return ''
+
+      }
+
+      // return t('chatbotResponseDefault');
    };
 
    return (

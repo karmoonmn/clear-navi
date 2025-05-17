@@ -38,7 +38,7 @@ const Chatbot = ({
                <div className="bg-navyblue-600 text-white px-4 py-3 flex justify-between items-center">
                   <h3 className="font-medium">{t('registrationAssistant')}</h3>
                   <div className="flex items-center">
-                     {activeStep && (
+                     {activeStep && activeStep.number && (
                         <span className="mr-2 text-xs bg-white text-navyblue-700 px-2 py-0.5 rounded-full">
                            {t('step')} {activeStep.number}
                         </span>
