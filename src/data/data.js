@@ -4,9 +4,11 @@ export const grantProcessSteps = [
     title: "MULA: Permohonan Geran Digitalisasi PMKS",
     connections: ["node1"],
     completed: false,
+    number: 0,
   },
   {
     id: "node1",
+    number: 1,
     title: "Fasa 1: Semakan Kelayakan",
     mainSummary:
       "Sebelum meneruskan, pastikan perniagaan anda (Aminah's Creative Batik) memenuhi syarat-syarat asas kelayakan Geran Digitalisasi PMKS.",
@@ -29,11 +31,16 @@ export const grantProcessSteps = [
         link: "#placeholder_eligibility_checker_tool",
       },
     ],
+    importantNotes: [
+      "Syarat kelayakan boleh dikemas kini oleh pihak penganjur.",
+      "Setiap PKS hanya layak menerima geran ini sekali sahaja.",
+    ],
     connections: ["node2"],
     completed: false,
   },
   {
     id: "node2",
+    number: 2,
     title: "Fasa 2: Pemilihan TSP",
     mainSummary:
       "Pilih Penyedia Penyelesaian Teknologi (TSP) yang sah dan disenaraikan oleh MDEC. Dapatkan sebut harga untuk sistem E-dagang dan Pengurusan Inventori.",
@@ -57,11 +64,16 @@ export const grantProcessSteps = [
         completed: false,
       },
     ],
+    importantNotes: [
+      "Geran adalah 50% padanan atau sehingga RM5,000, yang mana lebih rendah, bagi setiap PKS.",
+      "Pilih TSP yang mempunyai reputasi baik dan memahami keperluan Aminah's Creative Batik.",
+    ],
     connections: ["node3"],
     completed: false,
   },
   {
     id: "node3",
+    number: 3,
     title: "Fasa 3: Penyediaan Dokumen",
     connections: ["node4"],
     completed: false,
@@ -85,9 +97,13 @@ export const grantProcessSteps = [
         completed: false,
       },
     ],
+    importantNotes: [
+      "Dokumen yang tidak lengkap atau tidak jelas boleh menyebabkan kelewatan atau penolakan permohonan.",
+    ],
     nestedSteps: [
       {
         id: "node31",
+        number: 3.1,
         title: "3.1 Sijil SSM & Profil Syarikat",
         mainSummary:
           "Sediakan salinan Sijil Pendaftaran Perniagaan dengan Suruhanjaya Syarikat Malaysia (SSM) DAN Profil Syarikat terkini dari MyData SSM atau e-Info SSM.",
@@ -108,11 +124,16 @@ export const grantProcessSteps = [
             completed: false,
           },
         ],
+        importantNotes: [
+          "Pastikan Sijil SSM belum tamat tempoh dan masih sah.",
+          "Nama syarikat pada sijil SSM mesti sama dengan nama pada akaun bank dan sebut harga TSP.",
+        ],
         connections: ["node32"],
         completed: false,
       },
       {
         id: "node32",
+        number: 3.2,
         title: "3.2 Penyata Bank",
         mainSummary:
           "Salinan penyata akaun bank syarikat bagi dua (2) bulan terkini sebelum tarikh permohonan.",
@@ -139,6 +160,7 @@ export const grantProcessSteps = [
       },
       {
         id: "node33",
+        number: 3.3,
         title: "3.3 Salinan KP Pengarah/Pemilik",
         mainSummary:
           "Salinan kad pengenalan (depan dan belakang) SEMUA pengarah syarikat atau pemilik perniagaan (bagi Aminah's Creative Batik, ini mungkin Puan Aminah sahaja).",
@@ -157,6 +179,7 @@ export const grantProcessSteps = [
       },
       {
         id: "node34",
+        number: 3.4,
         title: "3.4 Sebut Harga TSP",
         mainSummary:
           "Sebut harga yang lengkap dan rasmi daripada Penyedia Penyelesaian Teknologi (TSP) yang telah dipilih oleh Aminah's Creative Batik untuk sistem E-dagang dan Pengurusan Inventori.",
@@ -171,6 +194,9 @@ export const grantProcessSteps = [
             completed: false,
           },
         ],
+        importantNotes: [
+          "Ini adalah dokumen penting untuk justifikasi jumlah geran yang dipohon.",
+        ],
         //   connections: ["NODE_PHASE4_SUBMISSION_BSN"],
         completed: false,
       },
@@ -178,6 +204,7 @@ export const grantProcessSteps = [
   },
   {
     id: "node4",
+    number: 4,
     title: "Fasa 4: Permohonan Dalam Talian (BSN)",
     mainSummary:
       "Setelah semua dokumen sokongan lengkap, permohonan Geran Digitalisasi PMKS perlu dibuat secara dalam talian (online) melalui portal rasmi Bank Simpanan Nasional (BSN).",
@@ -201,12 +228,16 @@ export const grantProcessSteps = [
         completed: false,
       },
     ],
-
+    importantNotes: [
+      "Proses dalam talian mungkin mengambil masa, pastikan sambungan internet stabil.",
+      "Semak semula semua maklumat yang diisi untuk mengelakkan kesilapan.",
+    ],
     connections: ["node5"],
     completed: false,
   },
   {
     id: "node5",
+    number: 5,
     title: "Fasa 5: Penilaian & Keputusan",
     mainSummary:
       "Pihak BSN/agensi berkaitan akan menyemak dan menilai permohonan anda. Tempoh penilaian mungkin berbeza.",

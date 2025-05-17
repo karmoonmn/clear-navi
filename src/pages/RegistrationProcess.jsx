@@ -1,18 +1,28 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
-import { grantProcessSteps } from '../data/newDataMalay';
+import { grantProcessSteps } from '../data/data';
 import ProgressBar from '../components/ProgressBar';
 import SimpleFlowDiagram from '../components/SimpleFlowDiagram';
 import Chatbot from '../components/Chatbot';
 import ChatService from '../services/ChatService';
+import { LanguageCode } from '../lang/LanguageCode';
 
 export default function RegistrationProcess() {
+   const { t, i18n: {changeLanguage, language} } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(language)
+
+  const handleChangeLanguage = () => {
+      const newLanguage = currentLanguage === LanguageCode.ENGLISH ? LanguageCode.MELAYU : LanguageCode.ENGLISH;
+      setCurrentLanguage(newLanguage);
+      changeLanguage(newLanguage);
+   }
    const navigate = useNavigate();
    const [steps, setSteps] = useState([]);
    const [activeStep, setActiveStep] = useState(null);
    const [chatbotOpen, setChatbotOpen] = useState(false);
    const [chatMessages, setChatMessages] = useState([
-      ChatService.getInitialMessage()
+      ChatService.getInitialMessage(t)
    ]);
    const [newMessage, setNewMessage] = useState('');
    const [suggestedQuestions, setSuggestedQuestions] = useState([]);
@@ -145,7 +155,7 @@ export default function RegistrationProcess() {
 
       // Generate the response
       setTimeout(() => {
-         let botResponse = "I don't have specific information about that question.";
+         let botResponse = t('botResponse');
 
          // Check if we have a predefined answer
          if (activeStep) {
@@ -194,10 +204,13 @@ export default function RegistrationProcess() {
    };
 
    return (
-      <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-navyblue-50 font-sans p-4">
-         <div className="max-w-5xl mx-auto">
+      <div className="w-full min-h-screen
+
+      bg-gray-100
+      font-sans p-4">
+         <div className="max-w-screen-xl mx-auto">
             {/* Back to Chatbot Button */}
-            <div className="mb-4">
+            <div className="mb-4 flex justify-between items-center">
                <button
                   onClick={() => navigate('/')}
                   className="flex items-center text-navyblue-600 hover:text-navyblue-800 font-medium"
@@ -205,46 +218,32 @@ export default function RegistrationProcess() {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                      <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
                   </svg>
-                  back
+                  {t('back')}
+               </button>
+               <button onClick={handleChangeLanguage}>
+                  {currentLanguage === LanguageCode.MELAYU ? 'Inggeris' : 'Malay'}
                </button>
             </div>
 
             <h1 className="text-3xl font-bold text-navyblue-800 text-center mb-4">
-               Geran Digitalisasi PMKS - E-dagang & Inventori
+               {t('title')}
             </h1>
             <p className="text-center text-gray-700 mb-6">
-               Peta perjalanan visual langkah demi langkah untuk memohon Geran Padanan Digitalisasi PMKS
+               {t('description')}
             </p>
 
             {/* Progress Bar */}
             <ProgressBar progressPercentage={progressPercentage} />
 
             {/* Process Flow Diagram using custom SimpleFlowDiagram */}
-            <div className='flex '>
-               <SimpleFlowDiagram
-                  steps={getAllSteps()}
-                  activeStep={activeStep}
-                  handleStepClick={handleStepClick}
-                  toggleTaskCompletion={toggleTaskCompletion}
-                  handleAskAboutStepClick={handleAskAboutStepClick}
-               />
+            <SimpleFlowDiagram
+               steps={getAllSteps()}
+               activeStep={activeStep}
+               handleStepClick={handleStepClick}
+               toggleTaskCompletion={toggleTaskCompletion}
+               handleAskAboutStepClick={handleAskAboutStepClick}
+            />
 
-               {/* Step Details */}
-               {/* {isDetailOpen && activeStep && (
-                  <div className=' md:sticky md:top-0 md:self-start'>
-
-                     <StepDetails
-                        activeStep={activeStep}
-                        steps={steps}
-                        handleStepClick={handleStepClick}
-                        toggleTaskCompletion={toggleTaskCompletion}
-                        handleAskAboutStepClick={handleAskAboutStepClick}
-                        getStepIcon={StepIconGenerator.getStepIcon}
-                        onClose={() => setIsDetailOpen(false)}
-                     />
-                  </div>
-               )} */}
-            </div>
 
 
             {/* Chatbot */}
@@ -261,7 +260,7 @@ export default function RegistrationProcess() {
             />
 
             <p className="text-center text-gray-500 mt-8">
-               Click on any step to view details or ask questions using the chat assistant
+               {t('stepDetails.clickToView')}
             </p>
          </div>
       </div>

@@ -78,11 +78,11 @@ const ChatService = {
   getFAQsForStep: (stepId) => {
     return stepResponses[stepId] ? Object.keys(stepResponses[stepId]) : [];
   },
-
-  getInitialMessage: () => {
+  
+  getInitialMessage: (t) => {
     return {
       sender: "bot",
-      text: "Hi there! Need help with your company registration? Click on any step in the process diagram or select a common question below.",
+      text: t('chatInitialMessage'),
     };
   },
 

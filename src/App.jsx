@@ -3,6 +3,7 @@ import RegistrationProcess from './pages/RegistrationProcess'
 import ChatbotPage from './pages/ChatbotPage'
 
 function App() {
+
   return (
     <Router>
       <Routes>

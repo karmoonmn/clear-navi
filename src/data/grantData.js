@@ -10,6 +10,7 @@ export const grantProcess = {
     {
       id: "NODE_START",
       type: "input",
+
       data: {
         label:
           "MULA: Permohonan Geran Digitalisasi PMKS\n(Aminah's Creative Batik: E-dagang & Inventori)",

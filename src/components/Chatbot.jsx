@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Chatbot = ({
    chatbotOpen,
@@ -11,6 +12,7 @@ const Chatbot = ({
    handleSuggestedQuestionClick,
    handleChatbotToggle
 }) => {
+   const { t } = useTranslation();
    return (
       <>
          {/* Chatbot Toggle Button */}
@@ -34,14 +36,13 @@ const Chatbot = ({
          {chatbotOpen && (
             <div className="fixed bottom-24 right-6 w-100 md:w-100 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden flex flex-col transition-all duration-300 ease-in max-h-96">
                <div className="bg-navyblue-600 text-white px-4 py-3 flex justify-between items-center">
-                  <h3 className="font-medium">Registration Assistant</h3>
+                  <h3 className="font-medium">{t('registrationAssistant')}</h3>
                   <div className="flex items-center">
                      {activeStep && (
                         <span className="mr-2 text-xs bg-white text-navyblue-700 px-2 py-0.5 rounded-full">
-                           Step {activeStep.id}
+                           {t('step')} {activeStep.number}
                         </span>
                      )}
-                     <span className="text-xs bg-green-500 px-2 py-0.5 rounded-full">Online</span>
                   </div>
                </div>
 
@@ -89,7 +90,7 @@ const Chatbot = ({
                      value={newMessage}
                      onChange={(e) => setNewMessage(e.target.value)}
                      onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                     placeholder={activeStep ? `Ask about ${activeStep.title}...` : "Ask about any step..."}
+                     placeholder={activeStep ? `${t('askAny')} ${activeStep.title}...` : t('askAnyStep')}
                      className="flex-1 border border-gray-300 rounded-l-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-navyblue-500"
                   />
                   <button
