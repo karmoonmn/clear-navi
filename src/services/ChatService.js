@@ -53,80 +53,27 @@ const stepResponses = {
 };
 
 const ChatService = {
-  getResponseForQuestion: (question, activeStep) => {
-    if (!question.trim()) return null;
+  getResponseForQuestion: async (userMessage, activeStep) => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: userMessage,
+          step: activeStep?.id || null,
+        }),
+      });
 
-    const userQuestion = question.toLowerCase();
-    let botResponse =
-      "I'm not sure about that. Can you ask something specific about the company registration process?";
-    let foundSpecificAnswer = false;
-
-    // Check if the question matches any predefined FAQs for the active step
-    if (activeStep) {
-      const stepFaqs = Object.keys(stepResponses[activeStep.id] || {});
-      for (const faq of stepFaqs) {
-        if (
-          userQuestion.includes(faq.toLowerCase()) ||
-          faq.toLowerCase().includes(userQuestion)
-        ) {
-          botResponse = stepResponses[activeStep.id][faq];
-          foundSpecificAnswer = true;
-          break;
-        }
-      }
+      const data = await response.json();
+      return data.reply;
+    } catch (err) {
+      console.error("Error calling backend:", err);
+      return "Sorry, something went wrong. Try again later.";
     }
-
-    // If no specific answer found, try generic keyword matching
-    if (!foundSpecificAnswer) {
-      if (
-        userQuestion.includes("name") ||
-        userQuestion.includes("reservation")
-      ) {
-        botResponse =
-          "For name reservation (Step A), you need to search and verify name availability on the MyCoID portal, submit the application, and pay a RM50 fee.";
-      } else if (
-        userQuestion.includes("document") ||
-        userQuestion.includes("prepare")
-      ) {
-        botResponse =
-          "For document preparation (Step B), you need details of directors and shareholders, company address, business activity codes, and consent forms.";
-      } else if (
-        userQuestion.includes("submit") ||
-        userQuestion.includes("application")
-      ) {
-        botResponse =
-          "To submit your incorporation application (Step C), fill in the Superform, upload all supporting documents, and pay the RM1,000 fee through MyCoID.";
-      } else if (
-        userQuestion.includes("post") ||
-        userQuestion.includes("setup")
-      ) {
-        botResponse =
-          "For post-incorporation setup (Step D), you'll receive a Notice of Registration, need to appoint a company secretary, open a corporate bank account, and register for taxes.";
-      } else if (
-        userQuestion.includes("optional") ||
-        userQuestion.includes("compliance")
-      ) {
-        botResponse =
-          "Optional registrations (Step E) include SST registration if your revenue exceeds RM500,000, applying for grants, setting up accounting systems, and ensuring annual compliance.";
-      } else if (
-        userQuestion.includes("fee") ||
-        userQuestion.includes("cost") ||
-        userQuestion.includes("pay")
-      ) {
-        botResponse =
-          "The main fees are RM50 for name reservation and RM1,000 for incorporation of a Sdn. Bhd. company.";
-      } else if (
-        userQuestion.includes("time") ||
-        userQuestion.includes("long") ||
-        userQuestion.includes("duration")
-      ) {
-        botResponse =
-          "The entire process typically takes 2-3 weeks from name reservation to post-incorporation setup, assuming no complications arise.";
-      }
-    }
-
-    return botResponse;
   },
+
 
   getFAQsForStep: (stepId) => {
     return stepResponses[stepId] ? Object.keys(stepResponses[stepId]) : [];
