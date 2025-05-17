@@ -82,7 +82,7 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
 
    // Vertical stacked layout for nodes with side details
    return (
-      <div className="relative w-full bg-blue-50 rounded-lg p-4">
+      <div className="relative w-full bg-gray-50 rounded-lg p-6">
          <div className="flex flex-col lg:flex-row gap-2">
             {/* Left side: Flow diagram */}
             <div
@@ -106,13 +106,13 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
                                     ${step.completed
                                        ? 'bg-green-600 text-white'
                                        : activeStep && activeStep.id === step.id
-                                          ? 'bg-navyblue-600 text-white'
+                                          ? 'bg-navyblue-400 text-white'
                                           : 'bg-white text-gray-700'
                                     }
                                     border-2 ${step.completed
                                        ? 'border-green-700'
                                        : activeStep && activeStep.id === step.id
-                                          ? 'border-navyblue-700'
+                                          ? 'border-navyblue-500'
                                           : 'border-navyblue-200'
                                     }
                                     transition-all duration-300 transform

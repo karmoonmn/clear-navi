@@ -40,7 +40,7 @@ const Chatbot = ({
                   <div className="flex items-center">
                      {activeStep && (
                         <span className="mr-2 text-xs bg-white text-navyblue-700 px-2 py-0.5 rounded-full">
-                           {t('step')} {activeStep.id}
+                           {t('step')} {activeStep.number}
                         </span>
                      )}
                   </div>

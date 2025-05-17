@@ -204,8 +204,11 @@ export default function RegistrationProcess() {
    };
 
    return (
-      <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-navyblue-50 font-sans p-4">
-         <div className="max-w-5xl mx-auto">
+      <div className="w-full min-h-screen
+
+      bg-gray-100
+      font-sans p-4">
+         <div className="max-w-screen-xl mx-auto">
             {/* Back to Chatbot Button */}
             <div className="mb-4 flex justify-between items-center">
                <button
@@ -233,15 +236,14 @@ export default function RegistrationProcess() {
             <ProgressBar progressPercentage={progressPercentage} />
 
             {/* Process Flow Diagram using custom SimpleFlowDiagram */}
-            <div className='flex '>
-               <SimpleFlowDiagram
-                  steps={getAllSteps()}
-                  activeStep={activeStep}
-                  handleStepClick={handleStepClick}
-                  toggleTaskCompletion={toggleTaskCompletion}
-                  handleAskAboutStepClick={handleAskAboutStepClick}
-               />
-            </div>
+            <SimpleFlowDiagram
+               steps={getAllSteps()}
+               activeStep={activeStep}
+               handleStepClick={handleStepClick}
+               toggleTaskCompletion={toggleTaskCompletion}
+               handleAskAboutStepClick={handleAskAboutStepClick}
+            />
+
 
 
             {/* Chatbot */}

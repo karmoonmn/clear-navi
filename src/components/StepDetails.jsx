@@ -1,5 +1,6 @@
 import React from 'react';
 import TaskItem from './TaskItem';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
 
 const StepDetails = ({
    activeStep,
@@ -40,7 +41,7 @@ const StepDetails = ({
    const details = currentStep.details || [];
 
    return (
-      <div className="bg-white rounded-lg shadow-lg p-6 mb-8 border border-gray-200 relative max-w-3xl mx-auto">
+      <div className="bg-white rounded-lg shadow-lg p-6 mb-8 border border-gray-200 relative max-w-3xl mx-auto ml-5">
          <button
             className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
             onClick={onClose}
@@ -61,7 +62,7 @@ const StepDetails = ({
 
             {details.length > 0 && (
                <>
-                  <h3 className="font-medium mb-4">Required Steps:</h3>
+                  <h3 className="font-medium mb-4 text-xl">Required Steps:</h3>
                   <div className="space-y-3">
                      {details.map((detail, idx) => {
                         const isCompleted = detail.completed || false;
@@ -83,12 +84,19 @@ const StepDetails = ({
 
             {currentStep.detailedPoints && currentStep.detailedPoints.length > 0 && (
                <>
-                  <h3 className="font-medium mb-4 mt-6">Key Information:</h3>
-                  <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                     {currentStep.detailedPoints.map((point, idx) => (
-                        <li key={idx}>{point}</li>
-                     ))}
-                  </ul>
+                  <h3 className="font-medium mb-4 mt-6 text-xl">Key Information:</h3>
+                  <div className="bg-blue-50 p-6 rounded-lg">
+                     <div className="space-y-4">
+                        {currentStep.detailedPoints.map((point, idx) => (
+                           <div key={idx} className="flex items-start">
+                              <div className="shrink-0 mt-0.5">
+                                 <InformationCircleIcon className="h-5 w-5 text-blue-500" />
+                              </div>
+                              <span className="ml-3 text-gray-700">{point}</span>
+                           </div>
+                        ))}
+                     </div>
+                  </div>
                </>
             )}
 
