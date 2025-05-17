@@ -23,7 +23,7 @@ const TaskItem = ({ detail, index, isCompleted, toggleTaskCompletion, stepId }) 
                   href={detail.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-2 text-indigo-500 hover:text-indigo-700 underline"
+                  className="ml-2 text-navyblue-500 hover:text-navyblue-700 underline"
                >
                   Link
                </a>

@@ -51,8 +51,8 @@ const StepDetails = ({
          </button>
 
          <div>
-            <h2 className="text-2xl font-semibold text-indigo-700 mb-2 flex items-center">
-               <span className="w-8 h-8 inline-flex items-center justify-center bg-indigo-100 rounded-full mr-2 text-indigo-700">
+            <h2 className="text-2xl font-semibold text-navyblue-700 mb-2 flex items-center">
+               <span className="w-8 h-8 inline-flex items-center justify-center bg-navyblue-100 rounded-full mr-2 text-navyblue-700">
                   {getStepIcon(activeStep)}
                </span>
                {currentStep.title}
@@ -106,7 +106,7 @@ const StepDetails = ({
             <div className="mt-8 flex justify-between">
                <button
                   onClick={handleAskAboutStepClick}
-                  className="flex items-center text-indigo-600 hover:text-indigo-800 border border-indigo-200 bg-indigo-50 px-4 py-2 rounded-md hover:bg-indigo-100 transition-colors"
+                  className="flex items-center text-navyblue-600 hover:text-navyblue-800 border border-navyblue-200 bg-navyblue-50 px-4 py-2 rounded-md hover:bg-navyblue-100 transition-colors"
                >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
@@ -137,7 +137,7 @@ const StepDetails = ({
                         return nextStep ? (
                            <button
                               key={id}
-                              className="flex items-center text-indigo-600 hover:text-indigo-800 font-medium ml-2 bg-indigo-50 px-3 py-1 rounded-full hover:bg-indigo-100 transition-colors"
+                              className="flex items-center text-navyblue-600 hover:text-navyblue-800 font-medium ml-2 bg-navyblue-50 px-3 py-1 rounded-full hover:bg-navyblue-100 transition-colors"
                               onClick={() => handleStepClick(nextStep)}
                            >
                               {nextStep.title}

@@ -16,7 +16,7 @@ const Chatbot = ({
          {/* Chatbot Toggle Button */}
          <button
             onClick={handleChatbotToggle}
-            className={`fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 ${chatbotOpen ? 'bg-red-500' : 'bg-indigo-600 hover:bg-indigo-700'
+            className={`fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 ${chatbotOpen ? 'bg-red-500' : 'bg-navyblue-600 hover:bg-navyblue-700'
                }`}
          >
             {chatbotOpen ? (
@@ -32,12 +32,12 @@ const Chatbot = ({
 
          {/* Chatbot Dialog */}
          {chatbotOpen && (
-            <div className="fixed bottom-24 right-6 w-80 md:w-96 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden flex flex-col transition-all duration-300 ease-in max-h-96">
-               <div className="bg-indigo-600 text-white px-4 py-3 flex justify-between items-center">
+            <div className="fixed bottom-24 right-6 w-100 md:w-100 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden flex flex-col transition-all duration-300 ease-in max-h-96">
+               <div className="bg-navyblue-600 text-white px-4 py-3 flex justify-between items-center">
                   <h3 className="font-medium">Registration Assistant</h3>
                   <div className="flex items-center">
                      {activeStep && (
-                        <span className="mr-2 text-xs bg-white text-indigo-700 px-2 py-0.5 rounded-full">
+                        <span className="mr-2 text-xs bg-white text-navyblue-700 px-2 py-0.5 rounded-full">
                            Step {activeStep.id}
                         </span>
                      )}
@@ -53,9 +53,9 @@ const Chatbot = ({
                      >
                         <div
                            className={`max-w-xs px-4 py-2 rounded-lg ${msg.sender === 'user'
-                              ? 'bg-indigo-100 text-gray-800'
+                              ? 'bg-navyblue-100 text-gray-800'
                               : msg.isContextUpdate
-                                 ? 'bg-indigo-50 text-indigo-700 border border-indigo-100'
+                                 ? 'bg-navyblue-50 text-navyblue-700 border border-navyblue-100'
                                  : 'bg-gray-100 text-gray-800'
                               }`}
                         >
@@ -74,7 +74,7 @@ const Chatbot = ({
                            <button
                               key={index}
                               onClick={() => handleSuggestedQuestionClick(question)}
-                              className="text-xs bg-white border border-gray-300 rounded-full px-3 py-1 hover:bg-indigo-50 hover:border-indigo-300 transition-colors"
+                              className="text-xs bg-white border border-gray-300 rounded-full px-3 py-1 hover:bg-navyblue-50 hover:border-navyblue-300 transition-colors"
                            >
                               {question}
                            </button>
@@ -90,11 +90,11 @@ const Chatbot = ({
                      onChange={(e) => setNewMessage(e.target.value)}
                      onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                      placeholder={activeStep ? `Ask about ${activeStep.title}...` : "Ask about any step..."}
-                     className="flex-1 border border-gray-300 rounded-l-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                     className="flex-1 border border-gray-300 rounded-l-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-navyblue-500"
                   />
                   <button
                      onClick={handleSendMessage}
-                     className="bg-indigo-600 text-white px-4 py-2 rounded-r-lg hover:bg-indigo-700 transition-colors"
+                     className="bg-navyblue-600 text-white px-4 py-2 rounded-r-lg hover:bg-navyblue-700 transition-colors"
                   >
                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />

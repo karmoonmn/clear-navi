@@ -98,14 +98,14 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
                                     ${step.completed
                                        ? 'bg-green-500 text-white'
                                        : activeStep && activeStep.id === step.id
-                                          ? 'bg-indigo-600 text-white'
+                                          ? 'bg-navyblue-600 text-white'
                                           : 'bg-white text-gray-700'
                                     }
                                     border-2 ${step.completed
                                        ? 'border-green-600'
                                        : activeStep && activeStep.id === step.id
-                                          ? 'border-indigo-700'
-                                          : 'border-indigo-200'
+                                          ? 'border-navyblue-700'
+                                          : 'border-navyblue-200'
                                     }
                                     transition-all duration-300 hover:opacity-90
                                  `}
@@ -131,7 +131,7 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
 
                            {/* If this is node3, render its nested steps */}
                            {step.id === 'node3' && nestedSteps.length > 0 && (
-                              <div className="mt-4 ml-10 pl-6 border-l-2 border-indigo-400 space-y-6">
+                              <div className="mt-4 ml-10 pl-6 border-l-2 border-navyblue-400 space-y-6">
                                  {nestedSteps.map((nestedStep) => (
                                     <div key={nestedStep.id} className="flex items-start">
                                        <div
@@ -142,14 +142,14 @@ const SimpleFlowDiagram = ({ steps, activeStep, handleStepClick, toggleTaskCompl
                                              ${nestedStep.completed
                                                 ? 'bg-green-500 text-white'
                                                 : activeStep && activeStep.id === nestedStep.id
-                                                   ? 'bg-indigo-600 text-white'
+                                                   ? 'bg-navyblue-600 text-white'
                                                    : 'bg-white text-gray-700'
                                              }
                                              border-2 ${nestedStep.completed
                                                 ? 'border-green-600'
                                                 : activeStep && activeStep.id === nestedStep.id
-                                                   ? 'border-indigo-700'
-                                                   : 'border-indigo-200'
+                                                   ? 'border-navyblue-700'
+                                                   : 'border-navyblue-200'
                                              }
                                              transition-all duration-300 hover:opacity-90
                                           `}

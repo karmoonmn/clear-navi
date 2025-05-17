@@ -5,7 +5,7 @@ import ChatService from '../services/ChatService';
 const ChatbotPage = () => {
    const navigate = useNavigate();
    const [messages, setMessages] = useState([
-      { sender: 'bot', text: 'Welcome to the PMKS Digitalization Grant Application Guide! I\'m here to help you with the application process. What would you like to know about the Digitalization Grant for E-commerce and Inventory Management?' }
+      { sender: 'bot', text: 'Welcome to the NaviClear! I\'m here to help you with the application process. What would you like to know about the Digitalization Grant for E-commerce and Inventory Management?' }
    ]);
    const [inputValue, setInputValue] = useState('');
    const [isTyping, setIsTyping] = useState(false);
@@ -92,12 +92,12 @@ const ChatbotPage = () => {
    };
 
    return (
-      <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 to-navyblue-100">
          {/* Header */}
-         <div className="bg-indigo-700 text-white p-4">
+         <div className="bg-navyblue-700 text-white p-4">
             <div className="container mx-auto">
-               <h1 className="text-2xl font-bold">AI Grant Assistant</h1>
-               <p className="text-sm opacity-80">Virtual Assistant for E-commerce & Inventory</p>
+               <h1 className="text-2xl font-bold">Welcome to NaviClear</h1>
+               <p className="text-sm opacity-80">Virtual Assistant for Grant & Regulation</p>
             </div>
          </div>
 
@@ -113,7 +113,7 @@ const ChatbotPage = () => {
                      >
                         <div
                            className={`max-w-[80%] p-3 rounded-lg ${message.sender === 'user'
-                              ? 'bg-indigo-600 text-white rounded-tr-none'
+                              ? 'bg-navyblue-600 text-white rounded-tr-none'
                               : 'bg-white text-gray-800 shadow-md rounded-tl-none'
                               }`}
                         >
@@ -144,7 +144,7 @@ const ChatbotPage = () => {
                   <button
                      key={index}
                      onClick={() => handleSuggestedQuestion(question)}
-                     className="bg-indigo-100 text-indigo-700 px-3 py-1.5 rounded-full text-sm hover:bg-indigo-200 transition-colors"
+                     className="bg-navyblue-100 text-navyblue-700 px-3 py-1.5 rounded-full text-sm hover:bg-navyblue-200 transition-colors"
                   >
                      {question}
                   </button>
@@ -158,11 +158,11 @@ const ChatbotPage = () => {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   placeholder="Type your question here..."
-                  className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-navyblue-500"
                />
                <button
                   type="submit"
-                  className="bg-indigo-600 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-indigo-700"
+                  className="bg-navyblue-600 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-navyblue-700"
                >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -174,7 +174,7 @@ const ChatbotPage = () => {
             <div className="mt-4 flex justify-center">
                <button
                   onClick={() => navigate('/registration')}
-                  className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
+                  className="bg-navyblue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-navyblue-700 transition-colors"
                >
                   View Application Process
                </button>

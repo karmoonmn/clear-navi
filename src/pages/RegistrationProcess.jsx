@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { grantProcessSteps } from '../data/newDataMalay';
 import ProgressBar from '../components/ProgressBar';
 import SimpleFlowDiagram from '../components/SimpleFlowDiagram';
-import StepDetails from '../components/StepDetails';
 import Chatbot from '../components/Chatbot';
-import StepIconGenerator from '../components/StepIconGenerator';
 import ChatService from '../services/ChatService';
 
 export default function RegistrationProcess() {
@@ -196,22 +194,22 @@ export default function RegistrationProcess() {
    };
 
    return (
-      <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 font-sans p-4">
+      <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-navyblue-50 font-sans p-4">
          <div className="max-w-5xl mx-auto">
             {/* Back to Chatbot Button */}
             <div className="mb-4">
                <button
                   onClick={() => navigate('/')}
-                  className="flex items-center text-indigo-600 hover:text-indigo-800 font-medium"
+                  className="flex items-center text-navyblue-600 hover:text-navyblue-800 font-medium"
                >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                      <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
                   </svg>
-                  Kembali ke Asisten AI
+                  back
                </button>
             </div>
 
-            <h1 className="text-3xl font-bold text-indigo-800 text-center mb-4">
+            <h1 className="text-3xl font-bold text-navyblue-800 text-center mb-4">
                Geran Digitalisasi PMKS - E-dagang & Inventori
             </h1>
             <p className="text-center text-gray-700 mb-6">
