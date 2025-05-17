@@ -6,15 +6,23 @@ import ProgressBar from '../components/ProgressBar';
 import SimpleFlowDiagram from '../components/SimpleFlowDiagram';
 import Chatbot from '../components/Chatbot';
 import ChatService from '../services/ChatService';
+import { LanguageCode } from '../lang/LanguageCode';
 
 export default function RegistrationProcess() {
-   const { t } = useTranslation();
+   const { t, i18n: {changeLanguage, language} } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(language)
+
+  const handleChangeLanguage = () => {
+      const newLanguage = currentLanguage === LanguageCode.ENGLISH ? LanguageCode.MELAYU : LanguageCode.ENGLISH;
+      setCurrentLanguage(newLanguage);
+      changeLanguage(newLanguage);
+   }
    const navigate = useNavigate();
    const [steps, setSteps] = useState([]);
    const [activeStep, setActiveStep] = useState(null);
    const [chatbotOpen, setChatbotOpen] = useState(false);
    const [chatMessages, setChatMessages] = useState([
-      ChatService.getInitialMessage()
+      ChatService.getInitialMessage(t)
    ]);
    const [newMessage, setNewMessage] = useState('');
    const [suggestedQuestions, setSuggestedQuestions] = useState([]);
@@ -199,7 +207,7 @@ export default function RegistrationProcess() {
       <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-navyblue-50 font-sans p-4">
          <div className="max-w-5xl mx-auto">
             {/* Back to Chatbot Button */}
-            <div className="mb-4">
+            <div className="mb-4 flex justify-between items-center">
                <button
                   onClick={() => navigate('/')}
                   className="flex items-center text-navyblue-600 hover:text-navyblue-800 font-medium"
@@ -208,6 +216,9 @@ export default function RegistrationProcess() {
                      <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
                   </svg>
                   {t('back')}
+               </button>
+               <button onClick={handleChangeLanguage}>
+                  {currentLanguage === LanguageCode.MELAYU ? 'Inggeris' : 'Malay'}
                </button>
             </div>
 

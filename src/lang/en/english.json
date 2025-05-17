@@ -35,5 +35,8 @@
     "questionPlaceholder": "Type your question here...",
     "chatbotInitialMessage": "Welcome to the NaviClear! I'm here to help you with the application process. What would you like to know about the Digitalization Grant for E-commerce and Inventory Management?",
     "registrationAssistant": "Registration Assistant",
-    "step": "Step"
+    "step": "Step",
+    "chatInitialMessage": "Hi there! Need help with your company registration? Click on any step in the process diagram or select a common question below.",
+    "askAnyStep": "Ask about any step...",
+    "askAny": "Ask about"
 }

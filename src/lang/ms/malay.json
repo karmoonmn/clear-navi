@@ -35,5 +35,8 @@
   "questionPlaceholder": "Tulis soalan anda di sini...",
   "chatbotInitialMessage": "Selamat datang ke NaviClear! Saya di sini untuk membantu anda dengan proses permohonan. Apa yang ingin anda ketahui tentang Geran Digitalisasi untuk Pengurusan E-dagang dan Inventori?",
   "registrationAssistant": "Pembantu Pendaftaran",
-  "step": "Langkah"
+  "step": "Langkah",
+  "chatInitialMessage": "Hai! Perlukan bantuan dengan pendaftaran syarikat anda? Klik pada mana-mana langkah dalam diagram proses atau pilih soalan umum di bawah.",
+  "askAnyStep": "Tanya tentang mana-mana langkah...",
+  "askAny": "Tanya tentang"
 }

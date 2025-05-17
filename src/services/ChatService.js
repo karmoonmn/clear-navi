@@ -52,7 +52,7 @@ const stepResponses = {
   },
 };
 
-const ChatService = {
+export const ChatService = {
   getResponseForQuestion: (question, activeStep) => {
     if (!question.trim()) return null;
 
@@ -131,11 +131,11 @@ const ChatService = {
   getFAQsForStep: (stepId) => {
     return stepResponses[stepId] ? Object.keys(stepResponses[stepId]) : [];
   },
-
-  getInitialMessage: () => {
+  
+  getInitialMessage: (t) => {
     return {
       sender: "bot",
-      text: "Hi there! Need help with your company registration? Click on any step in the process diagram or select a common question below.",
+      text: t('chatInitialMessage'),
     };
   },
 

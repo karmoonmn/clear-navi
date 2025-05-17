@@ -90,7 +90,7 @@ const Chatbot = ({
                      value={newMessage}
                      onChange={(e) => setNewMessage(e.target.value)}
                      onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                     placeholder={activeStep ? `Ask about ${activeStep.title}...` : "Ask about any step..."}
+                     placeholder={activeStep ? `${t('askAny')} ${activeStep.title}...` : t('askAnyStep')}
                      className="flex-1 border border-gray-300 rounded-l-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-navyblue-500"
                   />
                   <button
